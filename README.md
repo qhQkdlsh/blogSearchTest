@@ -9,3 +9,6 @@
 - 타임리프 템플릿
 - WebClient
 - bootstrap.css
+
+jar Download url
+https://github.com/qhQkdlsh/blogSearchTest/blob/main/blogSearch-0.0.1-SNAPSHOT.jar
