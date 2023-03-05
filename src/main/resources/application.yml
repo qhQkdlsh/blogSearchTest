@@ -25,7 +25,6 @@ spring:
     prefix: classpath:templates/
     check-template-location: true
     suffix: .html
-    cache: false
 
 logging.level:
   org.hibernate.SQL: debug
