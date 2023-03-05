@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main_layout}">
+<head>
+    <link th:href="@{/css/main.css}" rel="stylesheet" />
+</head>
+<!-- Content -->
+<div class="masthead" layout:fragment="content">
+    <div class="masthead-content text-white">
+        <div class="container-fluid px-4 px-lg-0">
+            <h1 class="fst-italic lh-1 mb-4">Blog Search</h1>
+            <p class="mb-5">Please enter a search word.</p>
+            <form id="searchForm" name="searchForm" action="/list" method="get">
+                <div class="row">
+                    <div class="col"><input class="form-control" id="keyword" name="keyword" type="text" placeholder="Enter blog Info..." aria-label="Enter blog Info..." data-sb-validations="required" /></div>
+                    <div class="col-auto"><button class="btn btn-primary disabled" id="submitButton" type="submit">Search</button></div>
+                </div>
+                <div class="invalid-feedback mt-2" data-sb-feedback="email:required">An email is required.</div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>

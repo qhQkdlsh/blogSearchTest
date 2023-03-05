@@ -1,0 +1,11 @@
+$(function(){
+    $("#size").change(function(){
+        $("#blogForm").submit();
+    });
+    $("#searchBtn").click(function(){
+        $("#blogForm").submit();
+    });
+    $("input[name='sort']").change(function(){
+        $("#blogForm").submit();
+    });
+});
