@@ -34,6 +34,6 @@ public class BlogListController {
         model.addAttribute("keyword",URLDecoder.decode(search.getKeyword()));
         search.setPageSize(blog);
         model.addAttribute("search",search);
-        return "/list";
+        return "list";
     }
 }
