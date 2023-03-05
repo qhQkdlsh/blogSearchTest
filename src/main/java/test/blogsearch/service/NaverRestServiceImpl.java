@@ -4,7 +4,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
+import test.blogsearch.dto.BlogDTO;
 import test.blogsearch.dto.SearchDTO;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class NaverRestServiceImpl implements NaverRestService {
@@ -17,7 +22,7 @@ public class NaverRestServiceImpl implements NaverRestService {
     private String naverBaseUrl;
 
     @Override
-    public String getData(SearchDTO searchDto){
+    public BlogDTO getData(SearchDTO searchDto){
 
         DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory(naverBaseUrl);
         factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.VALUES_ONLY);
@@ -29,7 +34,7 @@ public class NaverRestServiceImpl implements NaverRestService {
                 .defaultHeader("X-Naver-Client-Secret",naverClientSecret)
                 .build();
 
-        String response = webClient.get()
+        Map<String,Object> response = webClient.get()
                 .uri(uriBuilder -> uriBuilder
                         .queryParam("query", searchDto.getKeyword())
                         .queryParam("start", searchDto.getPage())
@@ -37,9 +42,24 @@ public class NaverRestServiceImpl implements NaverRestService {
                         .queryParam("sort", (searchDto.getSort().equals("accuracy")?"sim":"date"))
                         .build())
                 .retrieve()
-                .bodyToMono(String.class)
+                .bodyToMono(Map.class)
+                .map( m -> {
+                    Map<String,Object> meta = new HashMap<String,Object>();
+                    meta.put("total_count",m.getOrDefault("total",0));
+                    m.put("meta",meta);
+                    m.put("documents",  ( (List<HashMap<String,Object>>) m.get("items")).stream().map( i -> {
+                            i.put("contents",i.getOrDefault("description",""));
+                            i.put("url",i.getOrDefault("link",""));
+                            i.put("blogname",i.getOrDefault("bloggername",""));
+                            i.put("datetime",i.getOrDefault("postdate",""));
+                            return i;
+                        }).toList()
+                    );
+
+                    return m;
+                })
                 .block();
 
-        return response;
+        return new BlogDTO(response);
     }
 }

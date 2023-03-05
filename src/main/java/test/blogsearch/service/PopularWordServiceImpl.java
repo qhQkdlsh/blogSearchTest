@@ -6,7 +6,6 @@ import test.blogsearch.domain.KeywordInfoEntity;
 import test.blogsearch.repository.KeywordRepository;
 
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.List;
 
 @Service

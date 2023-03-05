@@ -1,6 +1,11 @@
 package test.blogsearch.dto;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.TypeFactory;
+
 import java.util.List;
+import java.util.Map;
 
 public class BlogDTO {
     private MetaDTO meta;
@@ -25,8 +30,17 @@ public class BlogDTO {
     public BlogDTO() {
         this.meta = new MetaDTO();
     }
-}
 
+    public BlogDTO(Map<String,Object> map) {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        MetaDTO meta = mapper.convertValue(map.get("meta"),MetaDTO.class);
+        List<DocumentsDTO> documents = mapper.convertValue(map.get("documents"), TypeFactory.defaultInstance().constructCollectionType(List.class, DocumentsDTO.class));
+
+        this.meta = meta;
+        this.documents = documents;
+    }
+}
 class MetaDTO{
     private Integer total_count;
     private Integer pageable_count;
@@ -60,14 +74,6 @@ class MetaDTO{
         this.total_count = 0;
     }
 
-    @Override
-    public String toString() {
-        return "MetaDTO{" +
-                "total_count=" + total_count +
-                ", pageable_count=" + pageable_count +
-                ", is_end=" + is_end +
-                '}';
-    }
 }
 
 class DocumentsDTO{
@@ -129,17 +135,5 @@ class DocumentsDTO{
             datetime = datetime.substring(0,4)+"-"+datetime.substring(4,6)+"-"+datetime.substring(6,8);
         }
         this.datetime = datetime;
-    }
-
-    @Override
-    public String toString() {
-        return "DocumentsDTO{" +
-                "title='" + title + '\'' +
-                ", contents='" + contents + '\'' +
-                ", url='" + url + '\'' +
-                ", blogname='" + blogname + '\'' +
-                ", thumbnail='" + thumbnail + '\'' +
-                ", datetime='" + datetime + '\'' +
-                '}';
     }
 }

@@ -29,7 +29,7 @@ public class KakaoRestServiceImpl implements KakaoRestService {
 
         BlogDTO blogDTO = webClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .queryParam("query", searchDto.getKeyword())
+                        .queryParam("query", "")
                         .queryParam("sort", searchDto.getSort())
                         .queryParam("page", searchDto.getPage())
                         .queryParam("size", searchDto.getSize())

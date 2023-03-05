@@ -19,15 +19,20 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public BlogDTO getBlogList(SearchDTO sc){
-        BlogDTO blogDTO = new BlogDTO();
-        try{
-            blogDTO = kakaoRestService.getData(sc);
-//            String test2 = naverRestService.getData(sc);
-        }catch (Exception e){
-            log.error("API 통신 에러");
-            log.error(e.toString());
-        }
 
-        return blogDTO;
+        try{
+            return kakaoRestService.getData(sc);
+        }catch (Exception e){
+            log.error("KAKAO API 통신 에러");
+            log.error(e.toString());
+
+            try{
+                return naverRestService.getData(sc);
+            }catch (Exception e2){
+                log.error("Naver API 통신 에러");
+                log.error(e2.toString());
+            }
+        }
+        return new BlogDTO();
     }
 }

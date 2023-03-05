@@ -19,7 +19,7 @@ public class KeywordServiceImpl implements KeywordService {
     @Transactional
     @Override
     public void keywordCountUpdate(SearchDTO sc){
-        if(sc.getKeyword() == null || sc.getKeyword().replace("+","").equals("")) return;
+        if(sc.getKeyword() == null || sc.getKeyword().equals("")) return;
         KeywordInfoEntity keyInfo = keywordRepository.findKeywordAndUpdate(sc.getKeyword());
         if(keyInfo == null){
             keyInfo = new KeywordInfoEntity();

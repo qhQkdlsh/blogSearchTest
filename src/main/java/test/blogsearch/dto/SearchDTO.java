@@ -16,7 +16,7 @@ public class SearchDTO {
     }
 
     public void setKeyword(String keyword) {
-        this.keyword = URLEncoder.encode(keyword);
+        this.keyword = URLEncoder.encode(keyword.strip());
     }
 
     public String getSort() {
