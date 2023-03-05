@@ -17,6 +17,12 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     private NaverRestService naverRestService;
 
+    /**
+     * lee_sm 230305
+     * 카카오 및 네이버 API 호출
+     * @param sc
+     * @return
+     */
     @Override
     public BlogDTO getBlogList(SearchDTO sc){
 

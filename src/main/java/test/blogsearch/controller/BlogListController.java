@@ -25,6 +25,12 @@ public class BlogListController {
     @Autowired
     private PopularWordService popularWordService;
 
+    /**
+     * 블로그 리스트 호출 및 조회
+     * @param search
+     * @param model
+     * @return
+     */
     @RequestMapping("/list")
     public String blogListPage(SearchDTO search, Model model){
         keywordService.keywordCountUpdate(search);

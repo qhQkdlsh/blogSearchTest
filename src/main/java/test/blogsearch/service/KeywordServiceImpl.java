@@ -16,6 +16,11 @@ public class KeywordServiceImpl implements KeywordService {
         this.keywordRepository = keywordRepository;
     }
 
+    /**
+     * lee_sm 230305
+     * 검색어 조회수 증가
+     * @param sc
+     */
     @Transactional
     @Override
     public void keywordCountUpdate(SearchDTO sc){

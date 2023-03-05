@@ -18,6 +18,11 @@ public class PopularWordServiceImpl implements PopularWordService {
         this.keywordRepository = keywordRepository;
     }
 
+    /**
+     * lee_sm 230305
+     * 인기 검색어 리턴(디코딩)
+     * @return
+     */
     @Override
     public List<KeywordInfoEntity> getPopularWordList(){
         List<KeywordInfoEntity> keyw = keywordRepository.findTop10ByOrderBySearchCountDesc();

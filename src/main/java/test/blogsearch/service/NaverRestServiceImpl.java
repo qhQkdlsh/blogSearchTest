@@ -21,6 +21,12 @@ public class NaverRestServiceImpl implements NaverRestService {
     @Value("${blogApi.naver.url}")
     private String naverBaseUrl;
 
+    /**
+     * lee_sm 230305
+     * 네이버 API 호출(WebClient)
+     * @param searchDto
+     * @return
+     */
     @Override
     public BlogDTO getData(SearchDTO searchDto){
 

@@ -15,6 +15,12 @@ public class KakaoRestServiceImpl implements KakaoRestService {
     @Value("${blogApi.kakao.url}")
     private String kakaoBaseUrl;
 
+    /**
+     * lee_sm 230305
+     * 카카오 API 호출
+     * @param searchDto
+     * @return
+     */
     @Override
     public BlogDTO getData(SearchDTO searchDto){
 
